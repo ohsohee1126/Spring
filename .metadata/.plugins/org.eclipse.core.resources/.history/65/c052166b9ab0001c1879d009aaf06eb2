@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<style>
+	#product .title {width:300px; }
+</style>
+
+<div id="page">
+	<h1>상품목록</h1>
+	<div style="border-bottom:1px dotted gray;padding-bottom:10px;">
+		<input type="text" placeholder="검색어" id="keyword">
+		<input type="button" value="검식" id="">
+	</div>
+	<table id="tbl"></table>
+			<script id="temp" type="text/x-handlebars-template">
+	{{#each list}}
+		<tr class="box">
+			<td width=200><img src="/display?fileName={{image}}" width=150></td>
+			<td width=400><p class="title ellipsis"><b>[{{code}}]</b> {{title}}</p></td>
+			<td width=100><p>{{display price}}원</p></td>
+			<td width=50><button class="update" code="{{code}}">수정</button></td>
+			<td width=150>
+				<small style="color:red;font-weight:bold">{{displayStatus isDelete}}</small>
+				<button class="delete" code="{{code}}">{{displayDel isDelete}}</button>
+			</td>
+		</tr>
+	{{/each}}
+</script>	
+</div>
+<div class="pagination"></div>
+<script>
+Handlebars.registerHelper("display", function(price) {
+	return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+})
+
+
+</script>
+<script>
+	var page="${param.page == null? 1:param.page}";
+	var keyword="${param.keyword == null? "":param.keyword}";
+	$("#keyword").val(keyword);
+	
+	getList();
+	//수정버튼을크릭하경우
+	$("#tbl").on("click",".rew .update", function(){
+		var code=$(this).attr("code");
+		locatic
+	})
+	//검색어에서 엔터를 친경우
+	$("#keyword").on("Keypress", function(e){
+		if(e.keyCode==13) $("search").click();
+	});
+	//검색버트을 클릭한경우
+	$("#search").on("click",function(){
+		keyword =$("#keyword").val();
+		var page=1;
+		getList();
+	})
+	//목자출럭함수
+	function getList(){
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"/product/list.json",
+		data:{page:page,keyword:keyword},
+		success:function(data){
+			var template = Handlebars.compile($("#temp").html());
+			$("#tbl").html(template(data))
+			$(".pagination").html(getPagination(data));
+			}							
+		})		
+	}
+		
+	
+		  //
+		  $(".pagination").on("click", "a", function(e){
+		      e.preventDefault();
+		      page=$(this).attr("href");
+		      getList();
+		   });
+		    
+
+	       
+ 
+</script>

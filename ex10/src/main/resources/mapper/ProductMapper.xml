@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ProductMapper">
+	<update id="qntUpdate">
+		update tbl_product set qnt=#{qnt}
+		where code=#{code}
+	</update>
+	<select id="read" resultType="com.example.domain.ProductVO">
+		select * from tbl_product
+		where code=#{code}
+	</select>
+	<update id="update">
+		update tbl_product 
+		set title=#{title}, price=#{price}, image=#{image}, content=#{content}
+		where code=#{code}
+	</update>
+	<insert id="insert">
+		insert into tbl_product(title, price, image)
+		values(#{title}, #{price}, #{image})
+	</insert>
+    <select id="list" resultType="com.example.domain.ProductVO">
+        select * from tbl_product
+        <if test="keyword != null">
+        	where title like concat('%', #{keyword}, '%')
+        </if>
+        order by code desc
+        limit #{pageStart}, #{perPageNum}
+    </select>
+    <select id="count" resultType="int">
+    	select count(*) from tbl_product
+    	<if test="keyword != null">
+        	where title like concat('%', #{keyword}, '%')
+        </if>
+    </select>
+</mapper>

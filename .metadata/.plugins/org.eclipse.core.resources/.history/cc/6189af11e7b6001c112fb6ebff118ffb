@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+	<title>채탕방</title>
+	<link rel="stylesheet"href="/resources/chat.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+</head>
+<body>
+	<div class="chat-wrap">
+		<div class="header">채 팅 방(${uid})</div>
+		<div id="chat"></div>
+		<script id="temp" type="text/x-handlebars-template">
+			<div class="{{display sender}}">			
+				<div class="sender">{{sender}}</div>
+				<div class="message">{{message}}</div>
+				<div class="date">{{date}}</div>
+			</div>
+		</script>
+		<script>
+			Handlebars.registerHelper("display",function(sender){
+				if(sender=="${uid}"){
+					return"right";
+				}else{
+					return"left";
+				}
+			})
+		</script>
+		<div class="input-div">
+			<textarea id="txtMessage" placeholder="내용을 입렷하세요."></textarea>
+		</div>
+	</div>
+</body>
+<script>
+	var uid="${uid}";
+	$("#txtMessage").on("keydown", function(e){
+		if(e.keyCode==13 && !e.shiftKey){
+			e.preventDefault();
+			var message=$(this).val();
+			if(message==""){
+				alert("보내실 내용을 입력하세요!");
+				return;
+			}
+			sock.send(uid + "|" +message);
+		}
+	})
+
+	//소캣설정
+	var sock= new SockJS("http://localhost:8088/sock_chat");
+	sock.onmessage = onMessage;
+	
+	//서버에서 메시지륿 밭을때
+	function onMessage(msg){
+		var items=meg.data.split("|");
+		var sender=items[0];
+		var message=items[1];
+		var date=items[2];
+		var date={sender:sender, message:message, date:date);
+		var temp=Handlebars.compie($("#temp").html());
+		$
+		}
+	}
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+

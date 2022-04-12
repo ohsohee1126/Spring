@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <style>
+		#product {
+			width:900px;
+			margin: 0px auto;
+			overflow:hidden;
+		}
+		.dox{
+			width:180px;
+			margin: 10px ;
+			float:laft;
+			float:1px solid gray;
+			padding:10px;
+		}
+		.title{
+			width:150px;
+		}
+		img{
+			width:150px;
+			display: block;
+			margin:0px auto;
+		}
+	</style>	
+<div id="page">
+	<h1>상품목록</h1>
+	<div id="product"></div>
+	<script id="temp" type="text/x-handlebars-template">
+		{{#each list}}
+			<div class="box">
+				<img sec="/display?fileName={{image}}">
+				<p  class="title ellipsis">{{title}}</p>
+				<p>{{price}}</p>
+			</div>
+		{{/each}}
+	</script>
+	<script>
+	Handlebars.registerHelper("display", function(amount){
+		return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	});
+	</script>
+	<div class="pagination"></div>
+</div>
+
+<script>
+	var page=1;
+	getList();
+	
+	function getList(){
+		$.ajax({
+			type:"get",
+			url:"/product/list.json",
+			data: {page:page},
+			dataType:"json",
+			success:functin(data){
+				var template =Handlebars.compile($("#temp").html());
+				$("#product").html(template(data));
+				$(".pagination").html(getPagination(data));
+			}
+		});
+	}
+	$(".pagination").on("click", "a" , function(e){
+		e.preventDefault();
+		page=$(this).attr();
+		getList();
+	});
+</script>

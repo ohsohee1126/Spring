@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+	<title>채탕방</title>
+	<link rel="stylesheet"href="/resources/chat.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+</head>
+<body>
+	<div class="chat-wrap">
+		<div class="header">채 팅 방(${uid})</div>
+		<div id="chat"></div>
+		<div class="input-div">
+			<textarea id="txtMessage" placeholder="내용을 입렷하세요."></textarea>
+		</div>
+	</div>
+</body>
+<script>
+	//소캣설정
+	vat sock= new SockJS("http://localhost:8088/sock_chat");
+	sock.onmessage = onMessage;
+	//서버에서 메시지륿 밭을때
+	function onMessage(msg){
+		
+	}
+</script>
+</html>

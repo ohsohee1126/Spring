@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<div class="page">
+	<h1>상품등록</h1>
+	<form name="frm">
+		<table>
+			<tr>
+				<td class="title" width=100>상품이름</td>
+				<td width=7000><input src="text" name="title" size=80>원</td>
+			</tr>
+		
+			<tr>
+				<td class="title" width=100>상품가격</td>
+				<td width=7000><input src="text" name="ㅔ걏ㄷ" size=8></td>
+			</tr>
+			<tr>
+				<td class="title" width=100>상품이미지</td>
+				<td width=7000>
+					<img src="https://via.placeholder.com/300x200" width=300/>
+					<input type="file" name="image" accept="image/*">
+				</td>
+			</tr>
+			<tr>
+				<td class="title" width=100>상품성명</td>
+				<td width=700>
+					<textarea rows="10" cols="80" name="content"></textarea>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align:center;margin-top:20px;">
+			<input type="submit" value="상품등록">
+			<input type="reset" value="등록취소">
+		</div>
+	</form>
+</div>

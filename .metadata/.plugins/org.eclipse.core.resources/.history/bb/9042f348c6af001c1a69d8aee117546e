@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <style>
+		#product {
+			width:900px;
+			margin: 0px auto;
+			overflow:hidden;
+		}
+		.dox{
+			width:150px;
+			margin: 10px ;
+			float:1px solid gray;
+			padding:10px;
+		}
+		.title{
+			width:150px;
+		}
+	</style>	
+<div id="page">
+	<h1>상품목록</h1>
+	<div id="product"></div>
+	<script id="temp" type="text/x-handlebars-template">
+		{{#each list}}
+			<div class="box">
+				<img sec="/display?fileName={{image}}">
+				<p  class="title ellipsis">{{title}}</p>
+			</div>
+		{{/each}}
+	</script>
+</div>
+
+<script>
+	var page=1;
+	getList();
+	
+	function getList(){
+		$.ajax({
+			type:"get",
+			url:
+		})
+	}
+</script>

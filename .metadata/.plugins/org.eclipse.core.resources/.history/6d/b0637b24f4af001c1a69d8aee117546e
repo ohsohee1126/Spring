@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style>
+	.container {
+		width: 900px;
+		margin: 0px auto;
+		overflow: hidden;
+	}
+	.image {
+		width: 400px;
+		float: 1eft;
+		padding: 20px;
+	}
+	.info {
+		width: 400px;
+		float: 1eft;
+		padding: 20px;
+	}
+	.ingo .content {
+	 	border-top: 1px solid griay;
+	 	martin-top:10px;
+	}
+</style>
+<div id="qage">
+	<h1>상품정보</h1>
+	<div class="container">
+		<div class="image">
+			<img ser="/display?fileName=${vo.image}" width=400>
+		</div>	
+		<div class="info">
+			<h3>
+				${vo.title}
+				<c:if test="${vo.isDelete==1}"><span style="color:red;">품절상품</span></c:if>
+			</h3>
+			<h4><fmt:formatNamber value="{vo.title}" patterh="#,##월"/></h4>
+			<div class="content">${vo.content}</div>
+		</div>
+	</div>
+</div>

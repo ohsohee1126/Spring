@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+    <div id="page">
+    	<h1>상품목록</h1>
+   		<table id="product"></table>
+   		<script id="temp" type="text/x-handlebars-template">
+		{{#each list}}
+			<tr class="box">
+				<td width=200><img src="/display?fileName={{image}}" width=150px></td>
+				<td width=400><p class="title ellipsis><b>[{{code}}]</d> {{title}}</p></td>
+				<td width=100><p>{{display price}}원</p></td>
+				<td width=100><button class="update" code="{{code}}">수정</dutton></td>
+				<td width=100>
+					상태:<span>{{displaySatus isDelete}}</span>
+					<button class="delete"code="{{code}}">{{displayDel isDelete}}</button>
+				</td>
+			</tr>
+		</script>
+   		<script>
+   			Handlebars.registerHelper("display",function(price){
+   				return price.toStrig().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+   			});
+   			Handlebars.registerHelper("displDel" , function(isDelete){
+   				if(isDelete == 0) return "품절";
+   				else return "입고";
+   			});
+   			Handlebars.registerHelper("displDel" , function(isDelete){
+   				if(isDelete == 0) return "판매가능";
+   				else return "품절";
+   			});
+   		</script>
+    <div class="pagination"></div>
+    </div>
+    
+    <script>
+    var page=${param.page == null? 1:param.page};
+    getList();
+    
+    $("#product").on("click" ,".box .delete",function(){
+    	var code=$(this).attr("code");
+    	var check=$(htis).hrml();
+    	if(!confirm(code + "번 상품을" + check+"처리 하실래요?"))return;
+    	 $.ajax({
+    		 type:"get",
+    		 url:{code:code, chck:check},
+    		 
+    	 })
+    })
+    
+    </script>

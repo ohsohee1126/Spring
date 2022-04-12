@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.MessageMapper">
+	<select id="read" resultType="hashmap">
+		select * from tbl_message
+		where mno=#{mno}
+	</select>
+	<update id="readdate">
+		update tbl_message set readdate=now()
+		where reddate is null and mno=#{mno}
+	</update>
+ 	<select id="receive" resultType="hashmap">
+       select tbl_message.*,uname,date_format(senddate,'%Y-%m-%d %T') date
+        from tbl_message, tbl_user
+		where receiver=#{uid} and uid=sender;
+    </select>
+    <select id="send" resultType="hashmap">
+        select tbl_message.*,uname, date_format(senddate,'%Y-%m-%d %T') date
+        from tbl_message, tbl_user
+		where uid=receiver  and sender=#{uid}
+    </select>
+    <insert id="sendMessage">
+    	insert into tbl_message(sender, receiver, message)
+    	values(#{sender}, #{receiver}, #{message})
+    </insert>
+</mapper>

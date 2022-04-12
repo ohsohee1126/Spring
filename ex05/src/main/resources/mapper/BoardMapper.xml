@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.BoardMapper">
+	<update id="replycnt">
+		update tbl_board 
+		set replycnt=replycnt + #{amount} 
+		where bno=#{bno}
+	</update>
+	<update id="viewcnt">
+		update tbl_board 
+		set viewcnt=viewcnt+1 
+		where bno=#{bno}
+	</update>
+    <select id="list" resultType="com.example.domain.BoardVO">
+        select * from tbl_board
+        <if test="keyword != null">
+        	where title like concat('%',#{keyword},'%')
+        	or content like concat('%',#{keyword},'%')
+        	or writer like concat('%',#{keyword},'%')
+        </if>
+        order by bno desc
+        limit #{pageStart}, #{perPageNum}
+    </select>
+    <select id="read" resultType="com.example.domain.BoardVO">
+        select * from tbl_board
+        where bno=#{bno}
+    </select>
+    <select id="count" resultType="int">
+    	select count(*) from tbl_board
+    	<if test="keyword != null">
+        	where title like concat('%',#{keyword},'%')
+        	or content like concat('%',#{keyword},'%')
+        	or writer like concat('%',#{keyword},'%')
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+package com.example.dao;
+
+import java.util.List;
+
+import com.example.domain.ChatVO;
+
+public class ChatDAoImpl implements ChatDAO{
+	@Autowired
+	SqlSession session;
+	String namespace="com.example.mapper.ChatMapper";
+	@Override
+	public List<ChatVO> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
