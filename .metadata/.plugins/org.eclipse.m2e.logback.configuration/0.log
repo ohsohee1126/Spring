@@ -18327,3 +18327,5 @@ org.eclipse.core.runtime.CoreException: Launch configuration MysqlTest.getTime r
 2022-04-12 13:17:19,617 [Worker-76] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2022-04-12 13:17:28,013 [Worker-73] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 2022-04-12 13:17:28,013 [Worker-73] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-04-12 13:17:28,013 [Worker-73] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-04-12 13:17:28,013 [Worker-73] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
